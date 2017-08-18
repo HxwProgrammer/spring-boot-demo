@@ -16,7 +16,6 @@
 *.iws
 *.iml
 *.ipr
-*.iml
 
 ### NetBeans ###
 nbproject/private/
