@@ -2,7 +2,7 @@ package com.example.demo01;
 
 import java.util.stream.IntStream;
 
-public class SumFunctionTest {
+public class SumFunctionExample {
 	public static void main(String[] args) {
 		System.out.println("sum1ToNumberByForLoop(100):" + sum1ToNumberByForLoop(100));
 		System.out.println("sum1ToNumberByForLoop(99):" + sum1ToNumberByForLoop(99));
@@ -14,7 +14,7 @@ public class SumFunctionTest {
 		System.out.println("sum1ToNumberByRecursiveFunction(99):" + sum1ToNumberByRecursiveFunction(99));
 	}
 
-	public static int sum1ToNumberByForLoop(final int number) {
+	private static int sum1ToNumberByForLoop(final int number) {
 		int sum = 0;
 
 		for (int i = 1; i <= number; i++) {
@@ -24,11 +24,11 @@ public class SumFunctionTest {
 		return sum;
 	}
 
-	public static int sum1ToNumberByStream(final int number) {
+	private static int sum1ToNumberByStream(final int number) {
 		return IntStream.range(0, number + 1).sum();
 	}
 
-	public static int sum1ToNumberByRecursiveFunction(final int number) {
+	private static int sum1ToNumberByRecursiveFunction(final int number) {
 		//  ___________________________
 		// |                           |
 		// 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
