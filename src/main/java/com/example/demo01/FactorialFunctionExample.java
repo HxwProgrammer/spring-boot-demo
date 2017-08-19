@@ -23,6 +23,7 @@ public class FactorialFunctionExample {
 	private static int factorialByStream(final int number) {
 		final int[] result = {1};
 		IntStream.range(1, number + 1).forEach(n -> result[0] *= n);
+
 		return result[0];
 	}
 
@@ -30,6 +31,7 @@ public class FactorialFunctionExample {
 		if (number == 1) {
 			return 1;
 		}
+
 		return number * factorialByRecursiveFunction(number - 1);
 	}
 }

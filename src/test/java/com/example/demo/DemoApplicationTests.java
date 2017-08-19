@@ -10,4 +10,5 @@ public class DemoApplicationTests extends AbstractApplicationContext {
 	public void contextLoads() {
 		log.info("contextLoads");
 	}
+	
 }

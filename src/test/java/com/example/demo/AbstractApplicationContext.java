@@ -12,4 +12,5 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootTest(classes = DemoApplication.class, webEnvironment = WebEnvironment.DEFINED_PORT, properties = {"server.port=10002"})
 public abstract class AbstractApplicationContext {
 
+	
 }
