@@ -25,7 +25,7 @@ public class SumFunctionExample {
 	}
 
 	private static int sum1ToNumberByStream(final int number) {
-		return IntStream.range(0, number + 1).sum();
+		return IntStream.rangeClosed(1, number).sum();
 	}
 
 	private static int sum1ToNumberByRecursiveFunction(final int number) {
