@@ -55,7 +55,6 @@ public class DemandExample {
 
 		demandInfoList.forEach(info -> log.info("info:{}", info));
 		playerDemandInfoList.forEach(info -> log.info("player info:{}", info));
-
 	}
 }
 
