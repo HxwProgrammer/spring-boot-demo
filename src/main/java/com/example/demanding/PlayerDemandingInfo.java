@@ -11,14 +11,21 @@ import lombok.Data;
 @Data
 public class PlayerDemandingInfo {
 	public enum PlayerDemandingState {
-		REGISTER, COMPLETE, WAIT, TERMINATE
+		REGISTER, COMPLETE, CANCEL
 	}
 
-	private String register;
-	private PlayerDemandingState playerDemandingState;
+	public enum PlayerDemandingType {
+		MY, FRIEND
+	}
+
+	private String playerId;
+	private int boardId;
 
 	private int demandingId;
 	private String accepter;
+
+	private PlayerDemandingType playerDemandingType;
+	private PlayerDemandingState playerDemandingState;
 
 	private DateTime updatedTime;
 	private DateTime createdTime;
