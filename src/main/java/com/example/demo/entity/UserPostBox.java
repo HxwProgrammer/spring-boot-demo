@@ -51,4 +51,11 @@ public class UserPostBox {
 		SYSTEM(0), GIFT(1);
 		int value;
 	}
+
+	@Getter
+	@AllArgsConstructor
+	public enum PostBoxMessageStatus {
+		NONE(0), CONFIRMED(1);
+		int value;
+	}
 }

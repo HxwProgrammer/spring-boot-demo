@@ -16,6 +16,7 @@ import com.example.demo.dynamodb.UserPostBoxRepository;
 import com.example.demo.dynamodb.UserStatusRepository;
 import com.example.demo.entity.UserInventory;
 import com.example.demo.entity.UserPostBox;
+import com.example.demo.entity.UserPostBox.PostBoxMessageStatus;
 import com.example.demo.entity.UserPostBox.PostBoxMessageType;
 import com.example.demo.entity.UserStatus;
 
@@ -100,6 +101,7 @@ public class DynamoRepositoryTest extends AbstractApplicationContext {
 				.fromPlayerId("system.1")
 				.messageTitle("system send test")
 				.messageType("system")
+				.messageStatus(PostBoxMessageStatus.NONE.getValue())
 				.attachmentItemId(0)
 				.attachmentItemType(PostBoxMessageType.SYSTEM.getValue())
 				.attachmentItemQty(1000L)
@@ -117,8 +119,7 @@ public class DynamoRepositoryTest extends AbstractApplicationContext {
 		userPostBoxes.forEach(v -> {
 			DateTime createdTime = new DateTime(v.getCreatedTime().getTime());
 			DateTime updatedTime = new DateTime(v.getUpdatedTime().getTime());
-			log.info("createdTime:{}", createdTime);
-			log.info("updatedTime:{}", updatedTime);
+			log.info("post:{}, createdTime:{}, updatedTime:{}", v, createdTime, updatedTime);
 		});
 	}
 
