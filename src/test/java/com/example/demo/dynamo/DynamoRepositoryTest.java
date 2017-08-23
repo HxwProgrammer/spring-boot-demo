@@ -1,6 +1,5 @@
 package com.example.demo.dynamo;
 
-import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -105,8 +104,8 @@ public class DynamoRepositoryTest extends AbstractApplicationContext {
 				.attachmentItemId(0)
 				.attachmentItemType(PostBoxMessageType.SYSTEM.getValue())
 				.attachmentItemQty(1000L)
-				.updatedTime(new Date())
-				.createdTime(new Date())
+				.updatedTime(System.currentTimeMillis())
+				.createdTime(System.currentTimeMillis())
 				.build();
 		userPostBoxRepository.save(upb);
 	}
@@ -117,8 +116,8 @@ public class DynamoRepositoryTest extends AbstractApplicationContext {
 		log.info("userPostBoxes:{}", userPostBoxes);
 
 		userPostBoxes.forEach(v -> {
-			DateTime createdTime = new DateTime(v.getCreatedTime().getTime());
-			DateTime updatedTime = new DateTime(v.getUpdatedTime().getTime());
+			DateTime createdTime = new DateTime(v.getCreatedTime());
+			DateTime updatedTime = new DateTime(v.getUpdatedTime());
 			log.info("post:{}, createdTime:{}, updatedTime:{}", v, createdTime, updatedTime);
 		});
 	}
@@ -128,5 +127,16 @@ public class DynamoRepositoryTest extends AbstractApplicationContext {
 		UserPostBox userPostBox = userPostBoxRepository.select(playerId, 1L);
 		log.info("userPostBox:{}", userPostBox);
 	}
+
+//	@Test
+//	public void delete() {
+//		userPostBoxRepository.batchDelete(
+//				Arrays.asList(
+//						UserPostBox.builder().playerId(playerId).messageId(195571905303885L).build(),
+//						UserPostBox.builder().playerId(playerId).messageId(194523745286961L).build()
+//				)
+//		);
+//
+//	}
 
 }

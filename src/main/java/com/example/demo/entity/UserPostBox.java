@@ -1,7 +1,5 @@
 package com.example.demo.entity;
 
-import java.util.Date;
-
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
@@ -41,9 +39,9 @@ public class UserPostBox {
 
 	private long attachmentItemQty;
 
-	private Date updatedTime;
+	private long updatedTime;
 
-	private Date createdTime;
+	private long createdTime;
 
 	@Getter
 	@AllArgsConstructor
