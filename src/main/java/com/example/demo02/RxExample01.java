@@ -19,6 +19,6 @@ public class RxExample01 {
 	}
 
 	private static String draw(final int step, final int value) {
-		return step + " * " + value + " = " + step * value;
+		return String.format("%d * %d = %d", step, value, step * value);
 	}
 }
