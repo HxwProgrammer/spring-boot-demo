@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.github.davidmoten.rx.jdbc.Database;
 
-public class DatabaseExample {
+public class RxDatabaseExample {
 	public static void main(String[] args) {
 		select1();
 
