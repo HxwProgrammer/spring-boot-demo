@@ -33,6 +33,7 @@ dependencies {
 //	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.43'
 	compile group: 'com.h2database', name: 'h2', version: '1.4.196'
 	compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
+	compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.180'
 }
 
 jar {
