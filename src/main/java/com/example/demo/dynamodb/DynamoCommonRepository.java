@@ -94,7 +94,7 @@ public class DynamoCommonRepository {
 		}
 	}
 
-	public void deleteTable(String tableName) {
+	public void deleteTable(final String tableName) {
 		final Table table = dynamoDB.getTable(tableName);
 		table.delete();
 

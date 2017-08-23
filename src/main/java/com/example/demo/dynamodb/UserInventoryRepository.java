@@ -2,6 +2,7 @@ package com.example.demo.dynamodb;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -37,7 +38,7 @@ public class UserInventoryRepository {
 	}
 
 	public List<UserInventory> selectAll(final String playerId, final boolean consistent) {
-		final HashMap<String, AttributeValue> eav = new HashMap<>();
+		final Map<String, AttributeValue> eav = new HashMap<>();
 		eav.put(":playerId", new AttributeValue().withS(playerId));
 		final DynamoDBQueryExpression<UserInventory> queryExpression = new DynamoDBQueryExpression<UserInventory>()
 				.withKeyConditionExpression("playerId = :playerId")
