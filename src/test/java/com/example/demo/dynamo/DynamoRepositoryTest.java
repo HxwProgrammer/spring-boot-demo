@@ -115,11 +115,10 @@ public class DynamoRepositoryTest extends AbstractApplicationContext {
 		List<UserPostBox> userPostBoxes = userPostBoxRepository.selectAll(playerId);
 		log.info("userPostBoxes:{}", userPostBoxes);
 
-		userPostBoxes.forEach(v -> {
-			DateTime createdTime = new DateTime(v.getCreatedTime());
-			DateTime updatedTime = new DateTime(v.getUpdatedTime());
-			log.info("post:{}, createdTime:{}, updatedTime:{}", v, createdTime, updatedTime);
-		});
+		userPostBoxes.stream()
+				.peek(value -> value.setUpdatedDateTime(new DateTime(value.getUpdatedTime())))
+				.peek(value -> value.setCreatedDateTime(new DateTime(value.getCreatedTime())))
+				.forEach(value -> log.info("value : {}", value));
 	}
 
 	@Test

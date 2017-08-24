@@ -1,6 +1,9 @@
 package com.example.demo.entity;
 
+import org.joda.time.DateTime;
+
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
@@ -42,6 +45,12 @@ public class UserPostBox {
 	private long updatedTime;
 
 	private long createdTime;
+
+	@DynamoDBIgnore
+	private DateTime updatedDateTime;
+
+	@DynamoDBIgnore
+	private DateTime createdDateTime;
 
 	@Getter
 	@AllArgsConstructor
