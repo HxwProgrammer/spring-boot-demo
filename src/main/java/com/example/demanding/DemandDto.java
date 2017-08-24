@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 @Data
-public class DemandingDto {
-	private DemandingBoardInfo demandingBoardInfo;
-	private PlayerDemandingInfo playerDemandingInfo;
+public class DemandDto {
+	private DemandBoardInfo demandBoardInfo;
+	private PlayerDemandInfo playerDemandInfo;
 }

@@ -9,16 +9,16 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 @Data
-public class DemandingBoardInfo {
-	public enum DemandingState {
+public class DemandBoardInfo {
+	public enum DemandState {
 		REGISTER, COMPLETE, CANCEL
 	}
 
 	// 의뢰 게시판 ID
-	private int demandingId;
+	private int demandId;
 
 	// 의뢰 상태
-	private DemandingState demandingState;
+	private DemandState demandState;
 
 	// 아이템 정보
 	private int itemId;

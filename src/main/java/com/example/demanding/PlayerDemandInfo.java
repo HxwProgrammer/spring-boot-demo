@@ -9,23 +9,23 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 @Data
-public class PlayerDemandingInfo {
-	public enum PlayerDemandingState {
+public class PlayerDemandInfo {
+	public enum PlayerDemandState {
 		REGISTER, COMPLETE, CANCEL
 	}
 
-	public enum PlayerDemandingType {
+	public enum PlayerDemandType {
 		MY, FRIEND
 	}
 
 	private String playerId;
 	private int boardId;
 
-	private int demandingId;
+	private int demandId;
 	private String accepter;
 
-	private PlayerDemandingType playerDemandingType;
-	private PlayerDemandingState playerDemandingState;
+	private PlayerDemandType playerDemandType;
+	private PlayerDemandState playerDemandState;
 
 	private DateTime updatedTime;
 	private DateTime createdTime;
