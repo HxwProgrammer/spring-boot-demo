@@ -1,4 +1,4 @@
-package com.example.demanding;
+package com.example.demandboard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,9 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.joda.time.DateTime;
 
-import com.example.demanding.DemandBoardInfo.DemandState;
-import com.example.demanding.PlayerDemandInfo.PlayerDemandState;
-import com.example.demanding.PlayerDemandInfo.PlayerDemandType;
+import com.example.demandboard.DemandBoardInfo.DemandState;
+import com.example.demandboard.PlayerDemandInfo.PlayerDemandState;
+import com.example.demandboard.PlayerDemandInfo.PlayerDemandType;
 
 import lombok.extern.slf4j.Slf4j;
 

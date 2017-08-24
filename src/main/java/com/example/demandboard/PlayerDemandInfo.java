@@ -1,4 +1,4 @@
-package com.example.demanding;
+package com.example.demandboard;
 
 import org.joda.time.DateTime;
 
