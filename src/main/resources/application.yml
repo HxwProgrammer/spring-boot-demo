@@ -1,2 +1,8 @@
 spring.output.ansi.enabled: always
 server.port: 10001
+
+aws:
+  host: http://localhost:8000
+  region: us-west-2
+  accessKey: "test"
+  secretKey: "test"

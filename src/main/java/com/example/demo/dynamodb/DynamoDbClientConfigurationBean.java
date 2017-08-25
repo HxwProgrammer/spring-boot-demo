@@ -1,5 +1,6 @@
 package com.example.demo.dynamodb;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,10 +18,17 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 @Configuration
 public class DynamoDbClientConfigurationBean {
 
-	private static final String host = "http://localhost:8000";
-	private static final String region = "us-west-2";
-	private static final String accessKey = "AKIAJZ4FHZ53NQFHKQWQ";
-	private static final String secretKey = "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";
+	@Value("${aws.host}")
+	private String host;
+
+	@Value("${aws.region}")
+	private String region;
+
+	@Value("${aws.accessKey}")
+	private String accessKey;
+
+	@Value("${aws.secretKey}")
+	private String secretKey;
 
 	@Bean(destroyMethod = "shutdown")
 	public AmazonDynamoDBAsync amazonDynamoDBAsync() {
