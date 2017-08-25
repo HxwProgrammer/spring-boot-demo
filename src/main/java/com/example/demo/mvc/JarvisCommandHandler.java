@@ -26,18 +26,18 @@ public class JarvisCommandHandler {
 
 	@PostConstruct
 	public void initialize() {
-		Map<String, Object> list = applicationContext.getBeansWithAnnotation(JarvisController.class);
+		final Map<String, Object> list = applicationContext.getBeansWithAnnotation(JarvisController.class);
 
 		list.forEach((k, v) -> {
 			// @JarvisController bean
-			Object bean = applicationContext.getBean(k);
-			Method[] methods = bean.getClass().getMethods();
+			final Object bean = applicationContext.getBean(k);
+			final Method[] methods = bean.getClass().getMethods();
 
-			JarvisCommandEntity entity = new JarvisCommandEntity();
+			final JarvisCommandEntity entity = new JarvisCommandEntity();
 			entity.setBeanName(k);
 
-			for (Method m : methods) {
-				JarvisCommand command = m.getDeclaredAnnotation(JarvisCommand.class);
+			for (final Method m : methods) {
+				final JarvisCommand command = m.getDeclaredAnnotation(JarvisCommand.class);
 				if (command != null && !"".equals(command.uri())) {
 					log.info("JarvisCommand method:{} uri:{}, desc:{}", m.getName(), command.uri(), command.description());
 					entity.getMethodMap().put(command.uri(), m);
@@ -49,7 +49,7 @@ public class JarvisCommandHandler {
 		jarvisCommandHolder.forEach((k, v) -> log.info("jarvisCommand:{} {}", k, v));
 	}
 
-	public static JarvisCommandEntity getJarvisCommandEntityMap(String command) {
+	public static JarvisCommandEntity getJarvisCommandEntityMap(final String command) {
 		return jarvisCommandHolder.get(command);
 	}
 

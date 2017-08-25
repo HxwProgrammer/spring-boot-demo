@@ -88,13 +88,13 @@ public class DynamoRepositoryTest extends AbstractApplicationContext {
 
 		log.info("count:{}", scan.getCount());
 
-		int[] k = {0};
+		final int[] k = {0};
 		scan.getResults().forEach(v -> log.info("[{}] {}", ++k[0], v));
 	}
 
 	@Test
 	public void saveUserPostBox() {
-		UserPostBox upb = UserPostBox.builder()
+		final UserPostBox upb = UserPostBox.builder()
 				.playerId(playerId)
 				.messageId(System.nanoTime())
 				.fromPlayerId("system.1")
@@ -112,7 +112,7 @@ public class DynamoRepositoryTest extends AbstractApplicationContext {
 
 	@Test
 	public void selectAll() {
-		List<UserPostBox> userPostBoxes = userPostBoxRepository.selectAll(playerId);
+		final List<UserPostBox> userPostBoxes = userPostBoxRepository.selectAll(playerId);
 		log.info("userPostBoxes:{}", userPostBoxes);
 
 		userPostBoxes.stream()
@@ -123,7 +123,7 @@ public class DynamoRepositoryTest extends AbstractApplicationContext {
 
 	@Test
 	public void select() {
-		UserPostBox userPostBox = userPostBoxRepository.select(playerId, 1L);
+		final UserPostBox userPostBox = userPostBoxRepository.select(playerId, 1L);
 		log.info("userPostBox:{}", userPostBox);
 	}
 

@@ -7,7 +7,7 @@ import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.functions.Functions;
 
-public class SingleExample {
+public class RxSingleExample {
 	public static void main(String[] args) {
 
 		System.out.println("=======consumer");

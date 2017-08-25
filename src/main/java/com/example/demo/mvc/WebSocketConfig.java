@@ -14,7 +14,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 	private JarvisWebSocketHandler jarvisWebSocketHandler;
 
 	@Override
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+	public void registerWebSocketHandlers(final WebSocketHandlerRegistry registry) {
 		registry
 				.addHandler(jarvisWebSocketHandler, "/api")
 				.setAllowedOrigins("*");
@@ -22,7 +22,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
 	@Bean
 	public ServletServerContainerFactoryBean servletServerContainerFactoryBean() {
-		ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
+		final ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();
 		container.setMaxTextMessageBufferSize(8192);
 		container.setMaxBinaryMessageBufferSize(8192);
 		return container;

@@ -26,24 +26,24 @@ public class JarvisMessageHandler {
 	@Autowired
 	private ApplicationContext applicationContext;
 
-	public void execute(WebSocketSession session, String payload) throws Exception {
+	public void execute(final WebSocketSession session, final String payload) throws Exception {
 		try {
 
 			if (StringUtils.isEmpty(payload)) {
 				throw new IllegalStateException("payload is empty");
 			}
 
-			JSONObject jo = new JSONObject(payload);
-			String command = jo.getString("command");
+			final JSONObject jo = new JSONObject(payload);
+			final String command = jo.getString("command");
 
 			if (command == null) {
 				throw new IllegalStateException("could not find command");
 			}
 
-			String[] commandArray = command.split("/", 3);
+			final String[] commandArray = command.split("/", 3);
 
 			String controllerClassName = null;
-			StringBuilder controllerMethodName = new StringBuilder("/");
+			final StringBuilder controllerMethodName = new StringBuilder("/");
 			for (String c : commandArray) {
 				if ("".equals(c)) {
 					continue;
@@ -57,21 +57,21 @@ public class JarvisMessageHandler {
 				controllerMethodName.append(c);
 			}
 
-			JarvisCommandEntity entity = JarvisCommandHandler.getJarvisCommandEntityMap(controllerClassName);
+			final JarvisCommandEntity entity = JarvisCommandHandler.getJarvisCommandEntityMap(controllerClassName);
 
 			if (entity == null) {
 				throw new IllegalStateException("could not find command");
 			}
 
-			String params = jo.getString("params");
+			final String params = jo.getString("params");
 
-			Object clazz = applicationContext.getBean(entity.getBeanName());
+			final Object clazz = applicationContext.getBean(entity.getBeanName());
 
 			if (clazz == null) {
 				throw new IllegalStateException("could not find command");
 			}
 
-			Method method = entity.getMethodMap().get(controllerMethodName.toString());
+			final Method method = entity.getMethodMap().get(controllerMethodName.toString());
 
 			if (method == null) {
 				throw new IllegalStateException("could not find command");
@@ -79,7 +79,7 @@ public class JarvisMessageHandler {
 
 			Object p = null;
 
-			Class<?>[] paramTypes = method.getParameterTypes();
+			final Class<?>[] paramTypes = method.getParameterTypes();
 
 			if (paramTypes.length > 0) {
 				Class<?> pType = paramTypes[0];

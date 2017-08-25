@@ -118,14 +118,14 @@ public class DemandBoardExample {
 				.build();
 	}
 
-	private static void onCompleteAll(final DemandDto demandDto, final PlayerDemandInfo acquireDemandingInfo) {
+	private static void onCompleteAll(final DemandDto demandDto, final PlayerDemandInfo acquireDemandInfo) {
 		// 의뢰 게시판 상태 완료
 		demandDto.getDemandBoardInfo().setDemandState(DemandState.COMPLETE);
 		demandDto.getDemandBoardInfo().setUpdatedTime(DateTime.now());
 
 		// 의뢰 수락자 완료
-		acquireDemandingInfo.setUpdatedTime(DateTime.now());
-		acquireDemandingInfo.setPlayerDemandState(PlayerDemandState.COMPLETE);
+		acquireDemandInfo.setUpdatedTime(DateTime.now());
+		acquireDemandInfo.setPlayerDemandState(PlayerDemandState.COMPLETE);
 
 		// 의뢰 등록자 완료
 		demandDto.getPlayerDemandInfo().setUpdatedTime(DateTime.now());

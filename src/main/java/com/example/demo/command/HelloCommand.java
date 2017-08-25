@@ -22,13 +22,13 @@ import lombok.extern.slf4j.Slf4j;
 public class HelloCommand {
 
 	@JarvisCommand(uri = "/hello", description = "hello")
-	public HelloRes hello(HelloReq request) {
+	public HelloRes hello(final HelloReq request) {
 		log.info("hello:{}", request);
 		return new HelloRes(request);
 	}
 
 	@JarvisCommand(uri = "/world", description = "world")
-	public WorldRes world(WorldReq request) {
+	public WorldRes world(final WorldReq request) {
 		log.info("world:{}", request);
 		return new WorldRes(request);
 	}

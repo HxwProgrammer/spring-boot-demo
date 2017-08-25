@@ -17,23 +17,23 @@ public class JarvisWebSocketHandler extends TextWebSocketHandler {
 	private JarvisMessageHandler jarvisMessageHandler;
 
 	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+	protected void handleTextMessage(final WebSocketSession session, final TextMessage message) throws Exception {
 		log.info("session:{}, message:{}", session, message);
 		jarvisMessageHandler.execute(session, message.getPayload());
 	}
 
 	@Override
-	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+	public void afterConnectionEstablished(final WebSocketSession session) throws Exception {
 		log.info("afterConnectionEstablished:{}", session);
 	}
 
 	@Override
-	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+	public void handleTransportError(final WebSocketSession session, final Throwable exception) throws Exception {
 		log.info("handleTransportError:{}, e:{}", session, exception.getMessage());
 	}
 
 	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+	public void afterConnectionClosed(final WebSocketSession session, final CloseStatus status) throws Exception {
 		log.info("afterConnectionClosed:{}, status:{}", session, status);
 	}
 }
