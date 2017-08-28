@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Data
 public class JarvisResponseEntity {
+	private int statusCode;
 	private long curTime;
 	private Object body;
-	private int statusCode;
 
 	public JarvisResponseEntity(final ChatStatusCode statusCode, final Object body) {
+		this.statusCode = statusCode.getValue();
 		this.curTime = System.currentTimeMillis();
 		this.body = body;
-		this.statusCode = statusCode.getValue();
 	}
 }
