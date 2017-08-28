@@ -14,7 +14,7 @@ public class WebSocketSessionHolder {
 
 	public static WebSocketSession getSession(WebSocketSession session) {
 		return sessions.stream()
-				.filter(se -> se == session)
+				.filter(se -> se.equals(session))
 				.findFirst().orElse(null);
 	}
 
