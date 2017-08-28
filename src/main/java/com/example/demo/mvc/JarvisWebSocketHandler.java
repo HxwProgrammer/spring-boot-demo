@@ -7,6 +7,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.example.demo.repository.chat.WebSocketSessionHolder;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -35,5 +37,6 @@ public class JarvisWebSocketHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(final WebSocketSession session, final CloseStatus status) throws Exception {
 		log.info("afterConnectionClosed:{}, status:{}", session, status);
+		WebSocketSessionHolder.removeSession(session);
 	}
 }

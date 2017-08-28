@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.example.constant.chat.ChatStatusCode;
 import com.example.demo.message.JarvisErrorEntity;
 import com.example.demo.message.JarvisResponseEntity;
 import com.google.gson.Gson;
@@ -82,7 +83,7 @@ public class JarvisMessageHandler {
 			final Class<?>[] paramTypes = method.getParameterTypes();
 
 			if (paramTypes.length > 0) {
-				Class<?> pType = paramTypes[0];
+				Class<?> pType = paramTypes[1];
 				p = gson.fromJson(params, pType);
 			}
 
@@ -90,18 +91,18 @@ public class JarvisMessageHandler {
 
 			Object responseData = null;
 			try {
-				responseData = method.invoke(clazz, p);
+				responseData = method.invoke(clazz, session, p);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 			log.info("responseData:{}", responseData);
 
-			session.sendMessage(new TextMessage(gson.toJson(new JarvisResponseEntity(200, responseData))));
+			session.sendMessage(new TextMessage(gson.toJson(new JarvisResponseEntity(ChatStatusCode.OK, responseData))));
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			session.sendMessage(new TextMessage(gson.toJson(new JarvisResponseEntity(500, new JarvisErrorEntity(e.getMessage())))));
+			session.sendMessage(new TextMessage(gson.toJson(new JarvisResponseEntity(ChatStatusCode.INTERNAL_SERVER_ERROR, new JarvisErrorEntity(e.getMessage())))));
 		}
 
 	}

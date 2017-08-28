@@ -1,6 +1,7 @@
 package com.example.demo.command;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.example.demo.message.hello.HelloReq;
 import com.example.demo.message.hello.HelloRes;
@@ -22,13 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 public class HelloCommand {
 
 	@JarvisCommand(uri = "/hello", description = "hello")
-	public HelloRes hello(final HelloReq request) {
+	public HelloRes hello(final WebSocketSession session, final HelloReq request) {
 		log.info("hello:{}", request);
 		return new HelloRes(request);
 	}
 
 	@JarvisCommand(uri = "/world", description = "world")
-	public WorldRes world(final WorldReq request) {
+	public WorldRes world(final WebSocketSession session, final WorldReq request) {
 		log.info("world:{}", request);
 		return new WorldRes(request);
 	}

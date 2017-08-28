@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+	<title>Chat Test</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			$("#message").attr("readonly", true);
+			$("#sendMessageBtn").prop("disabled", true);
+			$("#leftRoomBtn").prop("disabled", true);
+		});
+
+		var ws = new WebSocket("ws://localhost:10001/api");
+
+		ws.onopen = function () {
+			console.log("onopen");
+		};
+
+		ws.onmessage = function (event) {
+			var json = JSON.parse(event.data);
+			console.log("onmessage : " + event.data);
+			var body = json.body;
+			var messageType = body.messageType;
+			var now = new Date(json.curTime).toISOString();
+
+			switch (messageType) {
+				case "B_USER_JOINED":
+					log(getNow(now) + body.message);
+					joinnerLog(body.joinerNames);
+					break;
+				case "B_USER_LEFT":
+					log(getNow(now) + body.message);
+					joinnerLog(body.joinerNames);
+					break;
+				case "B_SEND_MESSAGE":
+					log(getNow(now) + body.userName + " : " + body.message);
+					break;
+				case "S_USER_JOINED":
+					joinnerLog(body.joinerNames);
+					break;
+			}
+		};
+
+		ws.onclose = function () {
+			console.log("onclose");
+		};
+
+		function getNow(now) {
+			return "[" + now + "] ";
+		}
+
+		function joinRoom() {
+			var userName = $("#userName").val();
+			var params = {"command": "/chatCommand/joinRoom", "params": {"userName": userName}};
+			ws.send(JSON.stringify(params));
+
+			$("#userName").attr("readonly", true);
+			$("#joinRoomBtn").prop("disabled", true);
+
+			$("#message").attr("readonly", false);
+			$("#sendMessageBtn").prop("disabled", false);
+			$("#leftRoomBtn").prop("disabled", false);
+
+		}
+
+		function leftRoom() {
+			var userName = $("#userName").val();
+			var params = {"command": "/chatCommand/leftRoom", "params": {"userName": userName}};
+			ws.send(JSON.stringify(params));
+
+			$("#userName").attr("readonly", false);
+			$("#joinRoomBtn").prop("disabled", false);
+
+			$("#message").attr("readonly", true);
+			$("#sendMessageBtn").prop("disabled", true);
+			$("#leftRoomBtn").prop("disabled", true);
+
+			resetJoinnerLog();
+		}
+
+		function sendMessage() {
+			var userName = $("#userName").val();
+			var message = $("#message").val();
+			var params = {"command": "/chatCommand/sendMessage", "params": {"userName": userName, "message": message}};
+			ws.send(JSON.stringify(params));
+		}
+
+		function log(log) {
+			$("#log").text($("#log").text() + log + "\n");
+			$("#log").scrollTop($("#log")[0].scrollHeight);
+		}
+
+		function joinnerLog(joinerNames) {
+			if (joinerNames !== undefined) {
+				var list = "";
+				joinerNames.forEach(function (value) {
+					list += value + "\n";
+				});
+				$("#joinerLog").text(list);
+				$("#joinerLog").scrollTop($("#joinerLog")[0].scrollHeight);
+			}
+		}
+
+		function resetJoinnerLog() {
+			$("#joinerLog").text("");
+		}
+
+	</script>
+</head>
+<body>
+
+<ul>
+	<li>UserName:</li>
+	<li><input type="text" id="userName"/>
+		<button id="joinRoomBtn" onclick="joinRoom()">JOIN</button>
+		<button id="leftRoomBtn" onclick="leftRoom()">LEFT</button>
+	</li>
+</ul>
+
+<ul>
+	<li>Message:</li>
+	<li><input type="text" id="message"/>
+		<button id="sendMessageBtn" onclick="sendMessage()">SEND</button>
+	</li>
+</ul>
+
+<ul>
+	<li>Chat:</li>
+	<li><textarea id="log" style="width:500px; height:500px;"></textarea></li>
+</ul>
+
+<ul>
+	<li>JoinerNames:</li>
+	<li><textarea id="joinerLog" style="width:500px; height:100px;"></textarea></li>
+</ul>
+
+</body>
+</html>
