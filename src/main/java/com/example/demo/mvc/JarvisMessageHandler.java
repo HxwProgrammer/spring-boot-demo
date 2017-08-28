@@ -64,7 +64,7 @@ public class JarvisMessageHandler {
 
 			final String responseJson = gson.toJson(new JarvisResponseEntity(ChatStatusCode.OK, res));
 
-			session.sendMessage(new TextMessage(gson.toJson(responseJson)));
+			session.sendMessage(new TextMessage(responseJson));
 
 			log.info("requestJson : {}", payload);
 			log.info("responseJson : {}", responseJson);
