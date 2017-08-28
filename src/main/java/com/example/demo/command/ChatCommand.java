@@ -66,7 +66,7 @@ public class ChatCommand {
 	}
 
 	@JarvisCommand(uri = "/leftRoom")
-	public LeftRoomRes leave(final WebSocketSession session, final LeftRoomReq req) {
+	public LeftRoomRes left(final WebSocketSession session, final LeftRoomReq req) {
 		final LeftRoomRes res = new LeftRoomRes();
 
 		WebSocketSessionHolder.removeSession(session);
