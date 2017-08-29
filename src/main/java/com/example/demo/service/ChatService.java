@@ -23,14 +23,14 @@ public class ChatService {
 	@Autowired
 	private Gson gson;
 
-	public void broadcastMessage(final String userName, final JarvisResponseEntity entity) {
+	public void broadcastMessage(final WebSocketSession session, final JarvisResponseEntity entity) {
 		WebSocketSessionHolder.getSessions().stream()
-				.filter(session -> session.getAttributes().get("userName") != userName)
+				.filter(se -> !se.equals(session))
 				.filter(Objects::nonNull)
 				.filter(WebSocketSession::isOpen)
-				.forEach(session -> {
+				.forEach(se -> {
 					try {
-						session.sendMessage(new TextMessage(gson.toJson(entity)));
+						se.sendMessage(new TextMessage(gson.toJson(entity)));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

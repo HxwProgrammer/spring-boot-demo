@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class JoinRoomRes {
-	private String messageType;
+	private String userName;
+	private String message;
 	private List<String> joinerNames;
 }

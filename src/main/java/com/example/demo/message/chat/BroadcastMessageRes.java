@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public class BroadcastMessageRes {
-	private String messageType;
 	private String userName;
 	private String message;
 	private List<String> joinerNames;

@@ -22,29 +22,19 @@
 			var json = JSON.parse(event.data);
 			console.log("onmessage : " + event.data);
 			var body = json.body;
-			var messageType = body.messageType;
+			// var command = body.command;
 			var now = new Date(json.curTime).toISOString();
 
-			switch (messageType) {
-				case "B_USER_JOINED":
-					log(getNow(now) + body.message);
-					joinnerLog(body.joinerNames);
-					break;
-				case "B_USER_LEFT":
-					log(getNow(now) + body.message);
-					joinnerLog(body.joinerNames);
-					break;
-				case "B_SEND_MESSAGE":
-					log(getNow(now) + body.userName + " : " + body.message);
-					break;
-				case "S_USER_JOINED":
-					joinnerLog(body.joinerNames);
-					break;
-			}
+			log(now, body.userName, body.message);
+			joinnerLog(body.joinerNames);
 		};
 
 		ws.onclose = function () {
 			console.log("onclose");
+		};
+
+		ws.onerror = function (event) {
+			console.log("onerror:" + event.data);
 		};
 
 		function getNow(now) {
@@ -62,7 +52,6 @@
 			$("#message").attr("readonly", false);
 			$("#sendMessageBtn").prop("disabled", false);
 			$("#leftRoomBtn").prop("disabled", false);
-
 		}
 
 		function leftRoom() {
@@ -87,13 +76,24 @@
 			ws.send(JSON.stringify(params));
 		}
 
-		function log(log) {
-			$("#log").text($("#log").text() + log + "\n");
+		function log(now, userName, message) {
+			if ($.isEmptyObject(userName) && $.isEmptyObject(message)) {
+				return;
+			}
+
+			var logMessage = "";
+			if ($.isEmptyObject(userName)) {
+				logMessage = getNow(now) + message;
+			} else {
+				logMessage = getNow(now) + "(" + userName + ") " + message;
+			}
+
+			$("#log").text($("#log").text() + logMessage + "\n");
 			$("#log").scrollTop($("#log")[0].scrollHeight);
 		}
 
 		function joinnerLog(joinerNames) {
-			if (joinerNames !== undefined) {
+			if (Array.isArray(joinerNames)) {
 				var list = "";
 				joinerNames.forEach(function (value) {
 					list += value + "\n";

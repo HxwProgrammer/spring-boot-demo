@@ -30,6 +30,7 @@ public class JarvisMessageHandler {
 
 	@AllArgsConstructor
 	class ParsedJsonCommand {
+		String command;
 		String[] commandArray;
 		String params;
 	}
@@ -45,8 +46,10 @@ public class JarvisMessageHandler {
 	}
 
 	public void execute(final WebSocketSession session, final String payload) throws Exception {
+		String command = null;
 		try {
 			final ParsedJsonCommand parsedInfo = parseCommand(payload);
+			command = parsedInfo.command;
 			final String params = parsedInfo.params;
 
 			final ControllerInfo controllerInfo = getControllerInfo(parsedInfo);
@@ -62,7 +65,7 @@ public class JarvisMessageHandler {
 				e.printStackTrace();
 			}
 
-			final String responseJson = gson.toJson(new JarvisResponseEntity(ChatStatusCode.OK, res));
+			final String responseJson = gson.toJson(new JarvisResponseEntity(command, ChatStatusCode.OK, res));
 
 			session.sendMessage(new TextMessage(responseJson));
 
@@ -71,7 +74,7 @@ public class JarvisMessageHandler {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			session.sendMessage(new TextMessage(gson.toJson(new JarvisResponseEntity(ChatStatusCode.INTERNAL_SERVER_ERROR, new JarvisErrorEntity(e.getMessage())))));
+			session.sendMessage(new TextMessage(gson.toJson(new JarvisResponseEntity(command, ChatStatusCode.INTERNAL_SERVER_ERROR, new JarvisErrorEntity(e.getMessage())))));
 		}
 	}
 
@@ -87,7 +90,7 @@ public class JarvisMessageHandler {
 			throw new IllegalStateException(String.format("could not find command : command is null, payload : %s", payload));
 		}
 
-		return new ParsedJsonCommand(command.split("/", 3), jo.getString("params"));
+		return new ParsedJsonCommand(command, command.split("/", 3), jo.getString("params"));
 	}
 
 	private ControllerInfo getControllerInfo(final ParsedJsonCommand parsedInfo) throws Exception {
