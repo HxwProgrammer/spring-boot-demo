@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.example.constant.chat.ChatStatusCode;
 import com.example.demo.message.JarvisResponseEntity;
+import com.example.demo.message.chat.BroadcastMessageRes;
 import com.example.demo.repository.chat.WebSocketSessionHolder;
+import com.example.demo.util.ChatUtil;
 import com.google.gson.Gson;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +47,13 @@ public class ChatService {
 				.map(se -> se.getAttributes().get("userName"))
 				.map(String::valueOf)
 				.collect(toList());
+	}
+
+	public void disconnected(final WebSocketSession session) {
+		final BroadcastMessageRes broadcastMessageRes = new BroadcastMessageRes();
+		broadcastMessageRes.setMessage(ChatUtil.getUserNameViaSession(session) + " has disconnected.");
+		broadcastMessageRes.setJoinerNames(getFilteredJoinerNames());
+		broadcastMessage(session, new JarvisResponseEntity("/disconnected", ChatStatusCode.OK, broadcastMessageRes));
 	}
 
 }
