@@ -1,6 +1,6 @@
 package com.example.demo.message;
 
-import com.example.constant.chat.ChatStatusCode;
+import com.example.demo.constant.chat.ChatStatusCode;
 
 import lombok.Data;
 

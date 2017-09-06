@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import com.example.constant.chat.ChatStatusCode;
+import com.example.demo.constant.chat.ChatStatusCode;
 import com.example.demo.message.JarvisResponseEntity;
 import com.example.demo.message.chat.BroadcastMessageRes;
 import com.example.demo.repository.chat.WebSocketSessionHolder;

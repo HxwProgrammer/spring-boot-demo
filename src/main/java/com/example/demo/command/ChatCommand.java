@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketSession;
 
-import com.example.constant.chat.ChatStatusCode;
+import com.example.demo.constant.chat.ChatStatusCode;
 import com.example.demo.message.JarvisResponseEntity;
 import com.example.demo.message.chat.BroadcastMessageRes;
 import com.example.demo.message.chat.JoinRoomReq;

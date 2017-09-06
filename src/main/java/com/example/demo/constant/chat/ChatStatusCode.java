@@ -1,4 +1,4 @@
-package com.example.constant.chat;
+package com.example.demo.constant.chat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

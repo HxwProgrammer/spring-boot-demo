@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import com.example.constant.chat.ChatStatusCode;
+import com.example.demo.constant.chat.ChatStatusCode;
 import com.example.demo.message.JarvisErrorEntity;
 import com.example.demo.message.JarvisResponseEntity;
 import com.google.gson.Gson;
