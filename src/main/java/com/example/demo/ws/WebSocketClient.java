@@ -36,7 +36,6 @@ public class WebSocketClient {
 	public void onMessage(Session session, String msg) {
 		try {
 			response = msg;
-			lock = new Object();
 			synchronized (lock) {
 				lock.notify();
 			}
@@ -57,6 +56,7 @@ public class WebSocketClient {
 	public String syncSendMessage(String msg) {
 		try {
 			long startTime = System.currentTimeMillis();
+			lock = new Object();
 			userSession.getBasicRemote().sendText(msg);
 			synchronized (lock) {
 				lock.wait();
